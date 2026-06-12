@@ -1,0 +1,12 @@
+{
+  "name": "telus-rewards-content-dashboard",
+  "version": "1.0.0",
+  "description": "TELUS Rewards Content Management Dashboard",
+  "main": "index.html",
+  "scripts": {
+    "start": "open index.html"
+  },
+  "keywords": ["telus", "rewards", "dashboard", "content"],
+  "author": "",
+  "license": "MIT"
+}
