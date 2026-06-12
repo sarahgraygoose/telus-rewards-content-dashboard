@@ -289,6 +289,11 @@ TELUS Rewards Team`
         return content.filter(c => c.date === dateStr);
       };
 
+      const getPlannerForDate = (day) => {
+        const dateStr = `${selectedMonth.getFullYear()}-${String(selectedMonth.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        return planner.filter(p => p.deploymentDate === dateStr);
+      };
+
       const channelColors = { newsletter: 'bg-blue-100 text-blue-800', social: 'bg-purple-100 text-purple-800', contest: 'bg-green-100 text-green-800', email: 'bg-orange-100 text-orange-800', twitter: 'bg-cyan-100 text-cyan-800', facebook: 'bg-indigo-100 text-indigo-800' };
       const statusColors = { draft: 'bg-gray-100 text-gray-800', pending: 'bg-yellow-100 text-yellow-800', scheduled: 'bg-blue-100 text-blue-800', published: 'bg-green-100 text-green-800' };
       const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -409,9 +414,13 @@ TELUS Rewards Team`
                   {Array(getDaysInMonth(selectedMonth)).fill(null).map((_, i) => {
                     const day = i + 1;
                     const items = getContentForDate(day);
+                    const plannerItems = getPlannerForDate(day);
+                    const plannerColors = { newsletter: 'bg-blue-200', social: 'bg-purple-200', '1:1 email': 'bg-orange-200', campaign: 'bg-green-200', 'channel readiness': 'bg-yellow-200', internal: 'bg-gray-200' };
+                    const statusIcons = { 'not started': '⚪', 'in progress': '🟡', 'for review': '🔵', 'complete': '✅' };
                     return (
                       <div key={day} className="bg-gray-50 rounded p-2 h-24 border overflow-y-auto">
                         <div className="font-bold text-sm">{day}</div>
+                        {plannerItems.map(p => <div key={p.id} className={`text-xs p-1 rounded mt-1 ${plannerColors[p.contentType]} border border-gray-400`}>{statusIcons[p.status]} {p.contentType.substring(0, 6)}</div>)}
                         {items.map(item => <div key={item.id} className={`text-xs p-1 rounded mt-1 ${channelColors[item.channel]}`}>{item.title.substring(0, 10)}</div>)}
                       </div>
                     );
