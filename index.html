@@ -263,211 +263,115 @@ Provide ONLY the adapted content.`
               <button onClick={() => { setShowCreateModal(true); setEditingId(null); setFormData({ title: '', channel: '', date: '', status: 'draft', content: '', description: '' }); setSelectedCatalogueItems([]); }} className="ml-auto flex items-center gap-2 px-4 py-2 bg-red-700 text-white rounded-lg font-medium">➕ New Content</button>
             </div>
 {showBrandGuide && (
-  <div className="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-red-700">
+  <div className="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-red-700 max-h-96 overflow-y-auto">
     <div className="flex justify-between items-center mb-4">
       <h3 className="text-xl font-bold text-gray-800">📋 Brand Guidelines Reference</h3>
-      <button onClick={() => setShowBrandGuide(false)} className="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+      <button onClick={() => setShowBrandGuide(false)} className="text-gray-500 hover:text-gray-700 text-xl font-bold">✕</button>
     </div>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+    
+    <div className="space-y-6 text-sm">
+      {/* Core Positioning */}
       <div>
-        <h4 className="font-bold text-red-700 mb-2">Core Positioning</h4>
+        <h4 className="font-bold text-red-700 mb-2 text-base">Core Positioning</h4>
         <p className="text-gray-700">TELUS Rewards is Canada's first and only tier-based loyalty program offered by a national telecommunications company.</p>
       </div>
+
+      {/* Key Pillars */}
       <div>
-        <h4 className="font-bold text-red-700 mb-2">Four Pillars</h4>
+        <h4 className="font-bold text-red-700 mb-2 text-base">Four Foundational Principles</h4>
         <ul className="text-gray-700 space-y-1">
-          <li>• Inclusive</li>
-          <li>• Simple</li>
-          <li>• Meaningful</li>
-          <li>• Rewarding</li>
+          <li>• <span className="font-semibold">Inclusive</span> — National availability with broad eligibility</li>
+          <li>• <span className="font-semibold">Simple</span> — Immediately understood and easy to adopt</li>
+          <li>• <span className="font-semibold">Meaningful</span> — Real, tangible value and powerful propositions</li>
+          <li>• <span className="font-semibold">Rewarding</span> — Delivers genuine appreciation and value</li>
         </ul>
       </div>
+
+      {/* Brand Voice */}
       <div>
-        <h4 className="font-bold text-red-700 mb-2">✅ Always Use</h4>
-        <ul className="text-green-700 space-y-1">
+        <h4 className="font-bold text-red-700 mb-2 text-base">Brand Voice</h4>
+        <ul className="text-gray-700 space-y-1">
+          <li>• <span className="font-semibold">Customers First</span> — Member value and benefits</li>
+          <li>• <span className="font-semibold">Innovative</span> — Highlight firsts and uniqueness</li>
+          <li>• <span className="font-semibold">Engaging</span> — Something for everyone in Rewards</li>
+        </ul>
+      </div>
+
+      {/* Terminology */}
+      <div className="bg-green-50 p-3 rounded border border-green-200">
+        <h4 className="font-bold text-green-800 mb-2 text-base">✅ Always Use This</h4>
+        <ul className="text-green-800 space-y-1">
           <li>✓ TELUS Rewards</li>
-          <li>✓ Members</li>
+          <li>✓ Members (not customers)</li>
           <li>✓ Earn points</li>
-          <li>✓ Purple, Gold, Platinum, Diamond</li>
+          <li>✓ Redeem points</li>
+          <li>✓ Perks, exclusive perks</li>
+          <li>✓ Purple, Gold, Platinum, Diamond tier</li>
+          <li>✓ My TELUS Perks</li>
+          <li>✓ My Partner Perks</li>
         </ul>
       </div>
-      <div>
-        <h4 className="font-bold text-red-700 mb-2">❌ Never Use</h4>
-        <ul className="text-red-700 space-y-1">
-          <li>✗ Telus Rewards</li>
-          <li>✗ Customers</li>
+
+      {/* Never Say */}
+      <div className="bg-red-50 p-3 rounded border border-red-200">
+        <h4 className="font-bold text-red-800 mb-2 text-base">❌ Never Use This</h4>
+        <ul className="text-red-800 space-y-1">
+          <li>✗ Telus Rewards, TELUS rewards</li>
+          <li>✗ Customers, users</li>
+          <li>✗ Get points, collect points</li>
+          <li>✗ Spend points, use points</li>
           <li>✗ Free perks</li>
-          <li>✗ Best loyalty program</li>
+          <li>✗ Free contest (use "Zero-point contest")</li>
+          <li>✗ VIP tiers (use specific names)</li>
+          <li>✗ "Best loyalty program in Canada"</li>
         </ul>
+      </div>
+
+      {/* Tier Structure */}
+      <div>
+        <h4 className="font-bold text-red-700 mb-2 text-base">Tier Names (Always Capitalized)</h4>
+        <div className="grid grid-cols-2 gap-2 text-gray-700">
+          <div><span className="font-bold">Purple</span> - Entry tier</div>
+          <div><span className="font-bold">Gold</span> - 6 points/dollar</div>
+          <div><span className="font-bold">Platinum</span> - 8 points/dollar</div>
+          <div><span className="font-bold">Diamond</span> - 10 points/dollar</div>
+        </div>
+      </div>
+
+      {/* Key Metrics */}
+      <div>
+        <h4 className="font-bold text-red-700 mb-2 text-base">Key Metrics (For External Use)</h4>
+        <ul className="text-gray-700 space-y-1">
+          <li>• Total members: 1.5 million+</li>
+          <li>• Eligible customers: 3.8 million</li>
+          <li>• Membership penetration: 39.5%</li>
+          <li>• Email open rate: 40%</li>
+          <li>• Point redemption rate: 73%</li>
+          <li>• Annual program value: $400-$750</li>
+        </ul>
+      </div>
+
+      {/* Never Say Examples */}
+      <div className="border-l-4 border-yellow-400 bg-yellow-50 p-3">
+        <h4 className="font-bold text-yellow-800 mb-2 text-base">❗ Never Say These Things</h4>
+        <ul className="text-yellow-800 space-y-1 text-xs">
+          <li>✗ "TELUS Rewards is a points program" → Say "tier-based loyalty program"</li>
+          <li>✗ "Customers earn rewards" → Say "Members earn points and unlock perks"</li>
+          <li>✗ "The best loyalty program" → Say "A leading loyalty program"</li>
+          <li>✗ Tier names as adjectives → Say "Platinum tier benefits" not "Platinum benefits"</li>
+        </ul>
+      </div>
+
+      {/* Preferred Phrases */}
+      <div>
+        <h4 className="font-bold text-red-700 mb-2 text-base">Preferred Phrases</h4>
+        <div className="text-gray-700 text-xs space-y-1">
+          <div><span className="font-semibold">ecosystem engagement</span> instead of "spending more"</div>
+          <div><span className="font-semibold">household value maximization</span> instead of "upselling"</div>
+          <div><span className="font-semibold">retention</span> instead of "keeping customers"</div>
+          <div><span className="font-semibold">differentiated value</span> instead of "better value"</div>
+        </div>
       </div>
     </div>
   </div>
 )}
-            {view === 'catalogue' && (
-              <div className="space-y-6">
-                {Object.entries(catalogue).map(([category, items]) => (
-                  <div key={category} className="bg-white rounded-lg shadow-lg p-6">
-                    <h3 className="text-xl font-bold text-red-700 mb-4">{category}</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {items.map(item => (
-                        <div key={item.id} className="border rounded-lg p-4">
-                          <h4 className="font-bold text-gray-800 mb-2">{item.name}</h4>
-                          <p className="text-sm text-gray-600 mb-2">{item.value}</p>
-                          <div className="flex gap-2 flex-wrap">
-                            {item.tier && <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">{item.tier}</span>}
-                            {item.pointsCost && <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">{item.pointsCost} points</span>}
-                            {item.entry && <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">{item.entry}</span>}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {view === 'list' && (
-              <div className="space-y-4">
-                {content.length === 0 ? (
-                  <div className="bg-white rounded-lg shadow p-8 text-center text-gray-500">No content yet. Create your first piece!</div>
-                ) : (
-                  content.map(item => (
-                    <div key={item.id} className="bg-white rounded-lg shadow p-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <h3 className="text-lg font-bold text-gray-800 mb-2">{item.title}</h3>
-                          <p className="text-gray-600 mb-3">{item.content.substring(0, 150)}...</p>
-                          <div className="flex gap-2">
-                            <span className={`px-3 py-1 rounded-full text-sm font-medium ${channelColors[item.channel]}`}>{item.channel}</span>
-                            <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusColors[item.status]}`}>{item.status}</span>
-                            <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">{item.date}</span>
-                          </div>
-                        </div>
-                        <div className="flex gap-2 ml-4">
-                          {item.status === 'draft' && <button onClick={() => updateStatus(item.id, 'pending')} className="p-2 hover:bg-yellow-100 rounded">👁️</button>}
-                          {item.status === 'pending' && <button onClick={() => updateStatus(item.id, 'scheduled')} className="p-2 hover:bg-blue-100 rounded">✅</button>}
-                          <button onClick={() => { setRepurposingId(item.id); setShowRepurposeModal(true); setSelectedChannels({}); }} className="p-2 hover:bg-purple-100 rounded">⚡</button>
-                          <button onClick={() => deleteContent(item.id)} className="p-2 hover:bg-red-100 rounded">🗑️</button>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            )}
-
-            {view === 'calendar' && (
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-gray-800">{months[selectedMonth.getMonth()]} {selectedMonth.getFullYear()}</h2>
-                  <div className="flex gap-2">
-                    <button onClick={() => setSelectedMonth(new Date(selectedMonth.getFullYear(), selectedMonth.getMonth() - 1))} className="px-4 py-2 bg-gray-200 rounded">← Prev</button>
-                    <button onClick={() => setSelectedMonth(new Date())} className="px-4 py-2 bg-gray-200 rounded">Today</button>
-                    <button onClick={() => setSelectedMonth(new Date(selectedMonth.getFullYear(), selectedMonth.getMonth() + 1))} className="px-4 py-2 bg-gray-200 rounded">Next →</button>
-                  </div>
-                </div>
-                <div className="grid grid-cols-7 gap-2">
-                  {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => <div key={day} className="text-center font-bold text-gray-600 py-2">{day}</div>)}
-                  {Array(getFirstDayOfMonth(selectedMonth)).fill(null).map((_, i) => <div key={`empty-${i}`} className="bg-gray-50 rounded p-2 h-32"></div>)}
-                  {Array(getDaysInMonth(selectedMonth)).fill(null).map((_, i) => {
-                    const day = i + 1;
-                    const dayContent = getContentForDate(day);
-                    return (
-                      <div key={day} className="bg-gray-50 rounded p-2 h-32 border border-gray-200 overflow-y-auto">
-                        <div className="font-bold text-gray-800 mb-1">{day}</div>
-                        {dayContent.map(item => <div key={item.id} className={`text-xs p-1 rounded ${channelColors[item.channel]}`}>{item.title.substring(0, 12)}...</div>)}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {showCreateModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-              <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-                <div className="p-6">
-                  <h2 className="text-2xl font-bold text-gray-800 mb-4">Create New Content</h2>
-                  <div className="space-y-4">
-                    <input type="text" placeholder="Title" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-red-700" />
-                    <select value={formData.channel} onChange={(e) => setFormData({ ...formData, channel: e.target.value })} className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-red-700">
-                      <option value="">Select Channel</option>
-                      <option value="newsletter">Newsletter</option>
-                      <option value="social">Social Media</option>
-                      <option value="twitter">Twitter</option>
-                      <option value="facebook">Facebook</option>
-                      <option value="email">Email</option>
-                      <option value="contest">Contest</option>
-                    </select>
-                    <input type="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-red-700" />
-                    <textarea placeholder="Content" value={formData.content} onChange={(e) => setFormData({ ...formData, content: e.target.value })} className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-red-700 h-24" />
-                    <div className="border rounded-lg p-3 bg-gray-50 max-h-40 overflow-y-auto">
-                      <label className="text-sm font-semibold text-gray-700 block mb-2">Featured Offers/Perks</label>
-                      {Object.entries(catalogue).map(([category, items]) => (
-                        <div key={category}>
-                          <p className="text-xs font-bold text-gray-600 mt-2 mb-1">{category}</p>
-                          {items.map(item => (
-                            <label key={item.id} className="flex items-center text-sm p-1 cursor-pointer">
-                              <input type="checkbox" checked={selectedCatalogueItems.includes(item.id)} onChange={(e) => e.target.checked ? setSelectedCatalogueItems([...selectedCatalogueItems, item.id]) : setSelectedCatalogueItems(selectedCatalogueItems.filter(id => id !== item.id))} className="w-3 h-3 text-red-700" />
-                              <span className="ml-2">{item.name}</span>
-                            </label>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="flex gap-2">
-                      <button onClick={() => setShowGenerateModal(true)} className="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 font-medium">✨ AI Generate</button>
-                      <button onClick={saveContent} className="flex-1 bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-800 font-medium">Save</button>
-                      <button onClick={() => setShowCreateModal(false)} className="px-4 py-2 bg-gray-300 rounded-lg">Cancel</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {showGenerateModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-              <div className="bg-white rounded-lg shadow-xl max-w-lg w-full">
-                <div className="p-6">
-                  <h2 className="text-2xl font-bold text-gray-800 mb-4">✨ Generate Content</h2>
-                  <input type="text" placeholder="Describe your content" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-red-700 mb-4" />
-                  <div className="flex gap-2">
-                    <button onClick={generateContent} disabled={generating} className="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 font-medium disabled:opacity-50">{generating ? 'Generating...' : 'Generate'}</button>
-                    <button onClick={() => setShowGenerateModal(false)} className="px-4 py-2 bg-gray-300 rounded-lg">Cancel</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {showRepurposeModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-              <div className="bg-white rounded-lg shadow-xl max-w-lg w-full">
-                <div className="p-6">
-                  <h2 className="text-2xl font-bold text-gray-800 mb-4">🔄 Repurpose</h2>
-                  <div className="space-y-3 mb-6">
-                    {['social', 'twitter', 'facebook', 'email'].map(ch => (
-                      <label key={ch} className="flex items-center p-3 border rounded-lg cursor-pointer">
-                        <input type="checkbox" checked={selectedChannels[ch] || false} onChange={(e) => setSelectedChannels({ ...selectedChannels, [ch]: e.target.checked })} className="w-4 h-4 text-purple-600" />
-                        <span className="ml-3 font-semibold capitalize">{ch}</span>
-                      </label>
-                    ))}
-                  </div>
-                  <div className="flex gap-2">
-                    <button onClick={repurposeContent} disabled={generating} className="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 font-medium disabled:opacity-50">{generating ? 'Repurposing...' : 'Repurpose'}</button>
-                    <button onClick={() => setShowRepurposeModal(false)} className="px-4 py-2 bg-gray-300 rounded-lg">Cancel</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      );
-    };
-
-    ReactDOM.render(<TELUSRewardsDashboard />, document.getElementById('root'));
-  </script>
-</body>
-</html>
