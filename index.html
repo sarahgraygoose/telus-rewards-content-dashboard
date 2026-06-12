@@ -32,6 +32,8 @@
       const [plannerData, setPlannerData] = useState({ contentType: '', deploymentDate: '', status: 'not started' });
       const [reviewingId, setReviewingId] = useState(null);
       const [reviewData, setReviewData] = useState({ documentUrl: '', reviewerEmails: '' });
+      const [editingPlanId, setEditingPlanId] = useState(null);
+      const [editPlanData, setEditPlanData] = useState({});
 
       const templates = {
         newsletter: `Hi TELUS Rewards members! 🎉
@@ -444,6 +446,7 @@ TELUS Rewards Team`
                         <tr>
                           <th className="px-6 py-3 text-left font-bold">Content Type</th>
                           <th className="px-6 py-3 text-left font-bold">Deployment Date</th>
+                          <th className="px-6 py-3 text-left font-bold">Owner</th>
                           <th className="px-6 py-3 text-left font-bold">Status</th>
                           <th className="px-6 py-3 text-center font-bold">Actions</th>
                         </tr>
@@ -453,6 +456,7 @@ TELUS Rewards Team`
                           <tr key={item.id} className="border-t hover:bg-gray-50">
                             <td className="px-6 py-3 capitalize font-medium text-gray-800">{item.contentType}</td>
                             <td className="px-6 py-3 text-gray-600">{item.deploymentDate}</td>
+                            <td className="px-6 py-3 text-gray-600">{item.owner || '-'}</td>
                             <td className="px-6 py-3">
                               <select value={item.status} onChange={(e) => {
                                 if (e.target.value === 'for review') {
@@ -469,6 +473,7 @@ TELUS Rewards Team`
                               </select>
                             </td>
                             <td className="px-6 py-3 text-center">
+                              <button onClick={() => startEditPlanner(item)} className="text-blue-600 hover:text-blue-800 font-bold mr-2">Edit</button>
                               <button onClick={() => deletePlannerItem(item.id)} className="text-red-600 hover:text-red-800 font-bold">Delete</button>
                             </td>
                           </tr>
@@ -593,6 +598,7 @@ TELUS Rewards Team`
                       <textarea placeholder="What needs to be created? (e.g., Summer promotion for loyalty members)" value={plannerData.description || ''} onChange={(e) => setPlannerData({ ...plannerData, description: e.target.value })} className="w-full px-3 py-2 border rounded h-20" />
                     )}
                     <input type="date" value={plannerData.deploymentDate} onChange={(e) => setPlannerData({ ...plannerData, deploymentDate: e.target.value })} className="w-full px-3 py-2 border rounded" />
+                    <input type="text" placeholder="Owner (name or email)" value={plannerData.owner || ''} onChange={(e) => setPlannerData({ ...plannerData, owner: e.target.value })} className="w-full px-3 py-2 border rounded" />
                     <select value={plannerData.status} onChange={(e) => setPlannerData({ ...plannerData, status: e.target.value })} className="w-full px-3 py-2 border rounded">
                       <option value="not started">Not Started</option>
                       <option value="in progress">In Progress</option>
@@ -627,6 +633,42 @@ TELUS Rewards Team`
                     <div className="flex gap-2">
                       <button onClick={sendForReview} className="flex-1 bg-purple-600 text-white py-2 rounded font-medium">📧 Send for Review</button>
                       <button onClick={() => { setReviewingId(null); setReviewData({ documentUrl: '', reviewerEmails: '' }); }} className="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {editingPlanId && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+              <div className="bg-white rounded-lg shadow-xl max-w-lg w-full">
+                <div className="p-6">
+                  <h2 className="text-2xl font-bold mb-4">Edit Planner Item</h2>
+                  <div className="space-y-3">
+                    <select value={editPlanData.contentType} onChange={(e) => setEditPlanData({ ...editPlanData, contentType: e.target.value })} className="w-full px-3 py-2 border rounded">
+                      <option value="">Select Content Type</option>
+                      <option value="newsletter">Newsletter</option>
+                      <option value="social">Social</option>
+                      <option value="1:1 email">1:1 Email</option>
+                      <option value="campaign">Campaign</option>
+                      <option value="channel readiness">Channel Readiness</option>
+                      <option value="internal">Internal</option>
+                    </select>
+                    {editPlanData.contentType && (
+                      <textarea placeholder="What needs to be created?" value={editPlanData.description || ''} onChange={(e) => setEditPlanData({ ...editPlanData, description: e.target.value })} className="w-full px-3 py-2 border rounded h-20" />
+                    )}
+                    <input type="date" value={editPlanData.deploymentDate} onChange={(e) => setEditPlanData({ ...editPlanData, deploymentDate: e.target.value })} className="w-full px-3 py-2 border rounded" />
+                    <input type="text" placeholder="Owner (name or email)" value={editPlanData.owner || ''} onChange={(e) => setEditPlanData({ ...editPlanData, owner: e.target.value })} className="w-full px-3 py-2 border rounded" />
+                    <select value={editPlanData.status} onChange={(e) => setEditPlanData({ ...editPlanData, status: e.target.value })} className="w-full px-3 py-2 border rounded">
+                      <option value="not started">Not Started</option>
+                      <option value="in progress">In Progress</option>
+                      <option value="for review">For Review</option>
+                      <option value="complete">Complete</option>
+                    </select>
+                    <div className="flex gap-2">
+                      <button onClick={saveEditPlanner} className="flex-1 bg-red-700 text-white py-2 rounded font-medium">Save</button>
+                      <button onClick={() => { setEditingPlanId(null); setEditPlanData({}); }} className="px-4 py-2 bg-gray-300 rounded">Cancel</button>
                     </div>
                   </div>
                 </div>
