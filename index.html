@@ -195,7 +195,7 @@
               <button onClick={() => setView('calendar')} className={`px-4 py-2 rounded-lg font-medium ${view === 'calendar' ? 'bg-red-700 text-white' : 'bg-white text-gray-700'}`}>📅 Calendar</button>
               <button onClick={() => setView('list')} className={`px-4 py-2 rounded-lg font-medium ${view === 'list' ? 'bg-red-700 text-white' : 'bg-white text-gray-700'}`}>📝 Content</button>
               <button onClick={() => setView('catalogue')} className={`px-4 py-2 rounded-lg font-medium ${view === 'catalogue' ? 'bg-red-700 text-white' : 'bg-white text-gray-700'}`}>📚 Catalogue</button>
-              <button onClick={() => setShowBrandGuide(!showBrandGuide)} className="px-4 py-2 bg-white text-gray-700 rounded-lg font-medium">📖 Brand Guide</button>
+              <a href="https://docs.google.com/document/d/1-5hSsd5AO93AieWxCXe6jBAEVp0_pF5rBt9AjbnG8n8/edit" target="_blank" className="px-4 py-2 bg-white text-gray-700 rounded-lg font-medium inline-block">📖 Brand Guide</a>
               <button onClick={() => { setShowCreateModal(true); setFormData({ title: '', channel: '', date: '', status: 'draft', content: '', description: '' }); setSelectedCatalogueItems([]); }} className="ml-auto px-4 py-2 bg-red-700 text-white rounded-lg font-medium">➕ New</button>
             </div>
 
