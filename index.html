@@ -30,6 +30,8 @@
       const [selectedCatalogueItems, setSelectedCatalogueItems] = useState([]);
       const [formData, setFormData] = useState({ title: '', channel: '', date: '', status: 'draft', content: '', description: '' });
       const [plannerData, setPlannerData] = useState({ contentType: '', deploymentDate: '', status: 'not started' });
+      const [reviewingId, setReviewingId] = useState(null);
+      const [reviewData, setReviewData] = useState({ documentUrl: '', reviewerEmails: '' });
 
       const templates = {
         newsletter: `Hi TELUS Rewards members! 🎉
@@ -264,6 +266,22 @@ TELUS Rewards Team`
       const deletePlannerItem = (id) => setPlanner(planner.filter(p => p.id !== id));
       const updatePlannerStatus = (id, status) => setPlanner(planner.map(p => p.id === id ? { ...p, status } : p));
 
+      const sendForReview = () => {
+        if (!reviewData.reviewerEmails || !reviewData.documentUrl) {
+          alert('Please fill in document URL and reviewer emails');
+          return;
+        }
+        const item = planner.find(p => p.id === reviewingId);
+        const emailList = reviewData.reviewerEmails.split(',').map(e => e.trim()).join(',');
+        const subject = `Review Needed: ${item.contentType} - Due ${item.deploymentDate}`;
+        const body = `Hi Team,\n\nPlease review the following ${item.contentType} content:\n\nDocument: ${reviewData.documentUrl}\n\nDeployment Date: ${item.deploymentDate}\n\nPlease provide feedback and approval.\n\nThanks!`;
+        const mailtoLink = `mailto:${emailList}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoLink;
+        updatePlannerStatus(reviewingId, 'for review');
+        setReviewingId(null);
+        setReviewData({ documentUrl: '', reviewerEmails: '' });
+      };
+
       const getDaysInMonth = (date) => new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
       const getFirstDayOfMonth = (date) => new Date(date.getFullYear(), date.getMonth(), 1).getDay();
       const getContentForDate = (day) => {
@@ -427,7 +445,14 @@ TELUS Rewards Team`
                             <td className="px-6 py-3 capitalize font-medium text-gray-800">{item.contentType}</td>
                             <td className="px-6 py-3 text-gray-600">{item.deploymentDate}</td>
                             <td className="px-6 py-3">
-                              <select value={item.status} onChange={(e) => updatePlannerStatus(item.id, e.target.value)} className="px-2 py-1 border rounded text-sm">
+                              <select value={item.status} onChange={(e) => {
+                                if (e.target.value === 'for review') {
+                                  setReviewingId(item.id);
+                                  setReviewData({ documentUrl: '', reviewerEmails: '' });
+                                } else {
+                                  updatePlannerStatus(item.id, e.target.value);
+                                }
+                              }} className="px-2 py-1 border rounded text-sm">
                                 <option value="not started">Not Started</option>
                                 <option value="in progress">In Progress</option>
                                 <option value="for review">For Review</option>
@@ -555,6 +580,9 @@ TELUS Rewards Team`
                       <option value="channel readiness">Channel Readiness</option>
                       <option value="internal">Internal</option>
                     </select>
+                    {plannerData.contentType && (
+                      <textarea placeholder="What needs to be created? (e.g., Summer promotion for loyalty members)" value={plannerData.description || ''} onChange={(e) => setPlannerData({ ...plannerData, description: e.target.value })} className="w-full px-3 py-2 border rounded h-20" />
+                    )}
                     <input type="date" value={plannerData.deploymentDate} onChange={(e) => setPlannerData({ ...plannerData, deploymentDate: e.target.value })} className="w-full px-3 py-2 border rounded" />
                     <select value={plannerData.status} onChange={(e) => setPlannerData({ ...plannerData, status: e.target.value })} className="w-full px-3 py-2 border rounded">
                       <option value="not started">Not Started</option>
@@ -565,6 +593,31 @@ TELUS Rewards Team`
                     <div className="flex gap-2">
                       <button onClick={savePlannerItem} className="flex-1 bg-red-700 text-white py-2 rounded font-medium">Add</button>
                       <button onClick={() => { setShowPlannerModal(false); setPlannerData({ contentType: '', deploymentDate: '', status: 'not started' }); }} className="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {reviewingId && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+              <div className="bg-white rounded-lg shadow-xl max-w-lg w-full">
+                <div className="p-6">
+                  <h2 className="text-2xl font-bold mb-4">Send for Review</h2>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Document URL</label>
+                      <input type="url" placeholder="https://docs.google.com/..." value={reviewData.documentUrl} onChange={(e) => setReviewData({ ...reviewData, documentUrl: e.target.value })} className="w-full px-3 py-2 border rounded" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Reviewer Emails</label>
+                      <input type="text" placeholder="reviewer1@telus.com, reviewer2@telus.com" value={reviewData.reviewerEmails} onChange={(e) => setReviewData({ ...reviewData, reviewerEmails: e.target.value })} className="w-full px-3 py-2 border rounded" />
+                      <p className="text-xs text-gray-500 mt-1">Separate multiple emails with commas</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button onClick={sendForReview} className="flex-1 bg-purple-600 text-white py-2 rounded font-medium">📧 Send for Review</button>
+                      <button onClick={() => { setReviewingId(null); setReviewData({ documentUrl: '', reviewerEmails: '' }); }} className="px-4 py-2 bg-gray-300 rounded">Cancel</button>
                     </div>
                   </div>
                 </div>
